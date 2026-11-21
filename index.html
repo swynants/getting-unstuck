@@ -1,0 +1,2295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <meta name="artifact-type" content="narrative">
+  <meta name="design-style" content="handbook">
+  <title>Getting Unstuck — Your toolkit for managing procrastination</title>
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces */
+      --background: #ffffff;
+      --surface-container-low: #f4f5f7;
+      --surface-container: #e8ecf2;
+      --surface-container-high: #d7dee8;
+
+      /* Ink */
+      --on-surface: #0b0c0c;
+      --on-surface-variant: #4a5562;
+
+      /* Rules */
+      --outline: #142d54;
+      --outline-variant: #c7ced6;
+
+      /* Accents — Dark Blue & Orange matching video slides */
+      --primary: #142d54;
+      --primary-hover: #0e213f;
+      --on-primary: #ffffff;
+      --primary-container: #e6eef8;
+      --on-primary-container: #0e2447;
+      --secondary: #4c2c92;
+      --tertiary: #1a569e;
+      --accent: #c2410c;
+      --accent-soft: #fff4ed;
+      --accent-border: #d9531e;
+      --on-accent: #ffffff;
+
+      /* Semantic */
+      --positive: #166534;
+      --positive-soft: #ecfdf5;
+      --warning: #9a3412;
+      --error: #b91c1c;
+      --on-error: #ffffff;
+
+      /* Data series */
+      --data-1: #142d54;
+      --data-2: #c2410c;
+      --data-3: #1a569e;
+      --data-4: #4c2c92;
+      --data-context: #c7ced6;
+
+      /* Typography — Self-contained clean sans-serif stack (no external fonts) */
+      --font-headline: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-label: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+      /* Type scale */
+      --display-size: clamp(2.125rem, 1.5rem + 2.6vw, 3.25rem);
+      --headline-size: clamp(1.5rem, 1.25rem + 1.2vw, 2rem);
+      --subhead-size: clamp(1.125rem, 1.05rem + 0.4vw, 1.3125rem);
+      --body-size: clamp(1.0625rem, 1rem + 0.2vw, 1.125rem);
+      --label-size: 0.875rem;
+      --small-size: 0.9375rem;
+
+      /* Shape */
+      --rounded: 2px;
+      --rounded-lg: 4px;
+      --rounded-full: 2px;
+
+      /* Style effects */
+      --top-index-rule: 6px solid var(--primary);
+      --inset-rule: 5px solid var(--accent);
+      --inset-rule-blue: 5px solid var(--tertiary);
+      --button-ground: 0 2px 0 #091526;
+      --button-ground-secondary: 0 2px 0 #8d96a0;
+      --card-shadow: 0 1px 2px rgba(11, 12, 12, 0.06);
+      --focus-yellow: #ffdd00;
+      --focus-ring: 3px solid var(--focus-yellow);
+      --focus-bar: inset 0 0 0 2px var(--on-surface);
+      --focus-underline: 0 -2px var(--focus-yellow), 0 4px var(--on-surface);
+      --focus: var(--focus-yellow);
+
+      /* Spacing scale (4pt base) */
+      --space-2xs: 0.125rem;
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Base reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.55;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    header {
+      position: static !important;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: var(--space-sm);
+      z-index: 100;
+      background: var(--focus-yellow);
+      color: var(--on-surface);
+      font-weight: 700;
+      padding: var(--space-sm) var(--space-md);
+      text-decoration: none;
+      border: 2px solid var(--on-surface);
+    }
+
+    .skip-link:focus {
+      left: var(--space-md);
+    }
+
+    /* Page container */
+    .page-shell {
+      border-top: var(--top-index-rule);
+      background: var(--background);
+    }
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-2xl);
+      padding: var(--space-lg) var(--space-md) var(--space-2xl);
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .page-grid * {
+      min-width: 0;
+    }
+
+    /* Typography */
+    h1, h2, h3 {
+      font-family: var(--font-headline);
+      color: var(--primary);
+      margin: 0;
+      letter-spacing: -0.015em;
+    }
+
+    h1 {
+      font-size: var(--display-size);
+      font-weight: 800;
+      line-height: 1.08;
+    }
+
+    h2 {
+      font-size: var(--headline-size);
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    h3 {
+      font-size: var(--subhead-size);
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    p {
+      margin: 0;
+      max-width: 65ch;
+    }
+
+    a {
+      color: var(--tertiary);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1.5px;
+      font-weight: 600;
+    }
+
+    a:hover {
+      color: var(--primary);
+      text-decoration-thickness: 3px;
+    }
+
+    a:visited {
+      color: var(--secondary);
+    }
+
+    /* Focus visibility — Handbook high-contrast yellow ring */
+    a:focus-visible {
+      outline: none;
+      background: var(--focus-yellow);
+      color: var(--on-surface);
+      text-decoration: none;
+      box-shadow: var(--focus-underline);
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    summary:focus-visible,
+    [tabindex="-1"]:focus-visible {
+      outline: var(--focus-ring);
+      outline-offset: 1px;
+      box-shadow: var(--focus-bar);
+    }
+
+    /* Header */
+    .site-header {
+      border-bottom: 2px solid var(--outline-variant);
+      padding-top: var(--space-md);
+      padding-bottom: var(--space-lg);
+      display: grid;
+      gap: var(--space-sm);
+    }
+
+    .site-header-accent {
+      width: 56px;
+      height: 5px;
+      background-color: var(--accent);
+      margin-bottom: var(--space-xs);
+    }
+
+    .site-subtitle {
+      font-size: var(--subhead-size);
+      font-weight: 700;
+      color: var(--on-surface);
+      margin-top: var(--space-xs);
+    }
+
+    .site-lead {
+      font-size: var(--body-size);
+      color: var(--on-surface-variant);
+      margin-top: var(--space-xs);
+    }
+
+    /* Section framing */
+    .content-section {
+      display: grid;
+      gap: var(--space-lg);
+    }
+
+    .section-head {
+      display: grid;
+      gap: var(--space-sm);
+      border-left: var(--inset-rule);
+      padding-left: var(--space-md);
+    }
+
+    /* Buttons */
+    button {
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      border: 2px solid transparent;
+      border-radius: var(--rounded);
+      font-size: var(--small-size);
+      font-weight: 700;
+      line-height: 1.25;
+      text-align: center;
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  transform var(--dur-micro) var(--ease-out),
+                  box-shadow var(--dur-micro) var(--ease-out);
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      box-shadow: var(--button-ground);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-primary:active {
+      transform: translateY(2px);
+      box-shadow: none;
+    }
+
+    .btn-secondary {
+      background-color: var(--surface-container-low);
+      color: var(--on-surface);
+      border-color: var(--outline-variant);
+      box-shadow: var(--button-ground-secondary);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--surface-container);
+      border-color: var(--primary);
+    }
+
+    .btn-secondary:active {
+      transform: translateY(2px);
+      box-shadow: none;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Section 1: Picker */
+    .picker-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+
+    .picker-btn {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: var(--space-md);
+      width: 100%;
+      min-height: 64px;
+      padding: var(--space-md) var(--space-lg);
+      background-color: var(--background);
+      color: var(--primary);
+      border: 2px solid var(--outline-variant);
+      border-left: 5px solid var(--primary);
+      border-radius: var(--rounded);
+      font-size: var(--body-size);
+      font-weight: 700;
+      line-height: 1.3;
+      text-align: left;
+      box-shadow: var(--card-shadow);
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  border-color var(--dur-micro) var(--ease-out),
+                  transform var(--dur-micro) var(--ease-out);
+    }
+
+    .picker-btn:hover {
+      background-color: var(--surface-container-low);
+      border-color: var(--primary);
+    }
+
+    .picker-btn[aria-pressed="true"] {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+      border-left: 5px solid var(--accent);
+    }
+
+    .picker-icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      color: var(--accent);
+    }
+
+    .picker-btn[aria-pressed="true"] .picker-icon {
+      color: var(--on-primary);
+    }
+
+    .picker-btn-label {
+      flex: 1;
+    }
+
+    .picker-active-mark {
+      font-size: var(--label-size);
+      font-weight: 700;
+      padding: var(--space-2xs) var(--space-sm);
+      background: var(--accent);
+      color: var(--on-accent);
+      border-radius: var(--rounded);
+    }
+
+    .picker-footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+
+    .picker-help-line {
+      font-size: var(--small-size);
+      color: var(--on-surface-variant);
+    }
+
+    .show-all-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: var(--space-xs) 0;
+    }
+
+    .picker-results {
+      background-color: var(--surface-container-low);
+      border-left: 5px solid var(--accent);
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-md);
+    }
+
+    .picker-results[hidden] {
+      display: none;
+    }
+
+    .picker-results-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+
+    .picker-results-title {
+      color: var(--primary);
+      font-size: var(--subhead-size);
+      font-weight: 800;
+    }
+
+    /* Section 2: Procrastination Loop */
+    .loop-container {
+      background-color: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-lg);
+    }
+
+    .loop-diagram {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr) minmax(0, 1fr);
+      grid-template-rows: auto auto auto;
+      gap: var(--space-sm);
+      align-items: center;
+      justify-items: center;
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .loop-node {
+      width: 100%;
+      background-color: var(--background);
+      border: 2px solid var(--primary);
+      border-top: 4px solid var(--accent);
+      border-radius: var(--rounded);
+      padding: var(--space-sm) var(--space-md);
+      text-align: center;
+      font-weight: 800;
+      font-size: var(--body-size);
+      color: var(--primary);
+      box-shadow: var(--card-shadow);
+    }
+
+    .loop-node--task {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .loop-node--feeling {
+      grid-column: 3;
+      grid-row: 2;
+    }
+
+    .loop-node--delay {
+      grid-column: 2;
+      grid-row: 3;
+    }
+
+    .loop-node--relief {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .loop-center {
+      grid-column: 2;
+      grid-row: 2;
+      background-color: var(--accent-soft);
+      border: 2px solid var(--accent);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      text-align: center;
+      font-weight: 800;
+      font-size: var(--small-size);
+      color: var(--on-surface);
+      line-height: 1.35;
+    }
+
+    .loop-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+    }
+
+    .loop-arrow--tr {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .loop-arrow--br {
+      grid-column: 3;
+      grid-row: 3;
+    }
+
+    .loop-arrow--bl {
+      grid-column: 1;
+      grid-row: 3;
+    }
+
+    .loop-arrow--tl {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .loop-arrow svg {
+      width: 34px;
+      height: 34px;
+    }
+
+    .loop-explanation {
+      font-size: var(--body-size);
+      color: var(--on-surface);
+      border-left: var(--inset-rule-blue);
+      background: var(--background);
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .citation-inline {
+      font-size: var(--small-size);
+      color: var(--on-surface-variant);
+    }
+
+    /* Feeling chooser */
+    .feeling-chooser {
+      display: grid;
+      gap: var(--space-md);
+      padding-top: var(--space-sm);
+    }
+
+    .feeling-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .feeling-btn {
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-lg);
+      background-color: var(--background);
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      border-radius: var(--rounded);
+      font-size: var(--body-size);
+      font-weight: 700;
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  color var(--dur-micro) var(--ease-out);
+    }
+
+    .feeling-btn:hover {
+      background-color: var(--primary-container);
+    }
+
+    .feeling-btn[aria-pressed="true"] {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+      box-shadow: inset 0 -4px 0 var(--accent);
+    }
+
+    .feeling-move {
+      background-color: var(--accent-soft);
+      border-left: 5px solid var(--accent);
+      padding: var(--space-md) var(--space-lg);
+      color: var(--on-surface);
+      font-weight: 600;
+    }
+
+    .feeling-move[hidden] {
+      display: none;
+    }
+
+    .feeling-move-label {
+      display: inline-block;
+      color: var(--accent);
+      font-weight: 800;
+      margin-right: var(--space-xs);
+    }
+
+    /* Section 3: Strategy Cards */
+    .star-legend {
+      list-style: none;
+      margin: 0;
+      padding: var(--space-md) var(--space-lg);
+      background-color: var(--surface-container-low);
+      border-left: 5px solid var(--accent);
+      display: grid;
+      gap: var(--space-xs);
+      font-size: var(--small-size);
+    }
+
+    .star-legend li {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: var(--space-sm);
+    }
+
+    .stars-visual {
+      color: var(--accent);
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .filters-panel {
+      display: grid;
+      gap: var(--space-md);
+      padding: var(--space-md) 0;
+      border-top: 1px solid var(--outline-variant);
+      border-bottom: 1px solid var(--outline-variant);
+    }
+
+    .filter-groups {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-lg);
+      align-items: flex-start;
+    }
+
+    .filter-group {
+      border: 0;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: var(--space-sm);
+    }
+
+    .filter-group legend {
+      font-size: var(--label-size);
+      font-weight: 700;
+      color: var(--on-surface-variant);
+      padding: 0;
+    }
+
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .filter-btn {
+      min-height: 44px;
+      min-width: 52px;
+      padding: var(--space-xs) var(--space-md);
+      background-color: var(--background);
+      color: var(--on-surface);
+      border: 2px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      font-size: var(--small-size);
+      font-weight: 700;
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  border-color var(--dur-micro) var(--ease-out);
+    }
+
+    .filter-btn:hover {
+      background-color: var(--surface-container-low);
+      border-color: var(--primary);
+    }
+
+    .filter-btn[aria-pressed="true"] {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    .filter-btn[aria-pressed="true"] .stars-visual {
+      color: var(--on-primary);
+    }
+
+    .filter-status-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      font-size: var(--small-size);
+      font-weight: 700;
+      color: var(--on-surface-variant);
+    }
+
+    /* Card grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+      gap: var(--space-lg);
+    }
+
+    .strategy-card {
+      background-color: var(--background);
+      border: 1px solid var(--outline-variant);
+      border-top: 4px solid var(--primary);
+      border-radius: var(--rounded);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      box-shadow: var(--card-shadow);
+    }
+
+    .strategy-card--highlight {
+      border-color: var(--accent);
+      border-top-color: var(--accent);
+      background-color: var(--accent-soft);
+    }
+
+    .card-header {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+
+    .video-tag {
+      display: inline-block;
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+      font-size: var(--label-size);
+      font-weight: 700;
+      padding: var(--space-2xs) var(--space-sm);
+      border-radius: var(--rounded);
+    }
+
+    .card-body {
+      display: grid;
+      gap: var(--space-sm);
+      font-size: var(--small-size);
+      flex: 1;
+    }
+
+    .card-field {
+      margin: 0;
+    }
+
+    .card-field-label {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .card-citation {
+      margin-top: auto;
+      padding-top: var(--space-sm);
+      border-top: 1px solid var(--outline-variant);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+
+    .link-placeholder {
+      display: inline-block;
+      background-color: var(--accent-soft);
+      color: var(--accent);
+      border: 1px dashed var(--accent);
+      padding: 0 var(--space-xs);
+      font-weight: 700;
+      font-size: var(--label-size);
+    }
+
+    .empty-results {
+      background-color: var(--surface-container-low);
+      border-left: var(--inset-rule);
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-md);
+      justify-items: start;
+    }
+
+    /* Section 4: Tools */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    .tool-panel {
+      background-color: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-top: 5px solid var(--primary);
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-lg);
+    }
+
+    .tool-header {
+      display: grid;
+      gap: var(--space-xs);
+    }
+
+    .tool-lead {
+      font-size: var(--small-size);
+      color: var(--on-surface-variant);
+    }
+
+    .form-fields {
+      display: grid;
+      gap: var(--space-md);
+    }
+
+    .field-group {
+      display: grid;
+      gap: var(--space-xs);
+    }
+
+    .field-group--error {
+      border-left: 4px solid var(--error);
+      padding-left: var(--space-sm);
+    }
+
+    .field-label {
+      font-size: var(--small-size);
+      font-weight: 700;
+      color: var(--on-surface);
+    }
+
+    .text-input,
+    .number-input {
+      width: 100%;
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      background-color: var(--background);
+      color: var(--on-surface);
+      border: 2px solid var(--outline);
+      border-radius: var(--rounded);
+      font-family: inherit;
+      font-size: var(--body-size);
+    }
+
+    .text-input[aria-invalid="true"],
+    .number-input[aria-invalid="true"] {
+      border-color: var(--error);
+    }
+
+    .field-error {
+      font-size: var(--label-size);
+      font-weight: 700;
+      color: var(--error);
+      min-height: 1.2em;
+    }
+
+    .field-error:empty {
+      display: none;
+    }
+
+    .plan-output-box {
+      background-color: var(--background);
+      border: 2px solid var(--primary);
+      border-left: 5px solid var(--accent);
+      padding: var(--space-md);
+      display: grid;
+      gap: var(--space-md);
+    }
+
+    .plan-output-box[hidden] {
+      display: none;
+    }
+
+    .plan-sentence {
+      font-size: var(--subhead-size);
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.4;
+    }
+
+    .plan-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .copy-feedback {
+      font-size: var(--label-size);
+      font-weight: 700;
+      color: var(--positive);
+    }
+
+    .tool-note {
+      font-size: var(--small-size);
+      color: var(--on-surface-variant);
+      border-top: 1px solid var(--outline-variant);
+      padding-top: var(--space-sm);
+    }
+
+    /* Tool 2: Focus Timer */
+    .timer-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .timer-settings {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+
+    .timer-display-box {
+      background-color: var(--background);
+      border: 2px solid var(--primary);
+      border-top: 5px solid var(--accent);
+      padding: var(--space-lg);
+      display: grid;
+      gap: var(--space-sm);
+      justify-items: start;
+    }
+
+    .timer-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .timer-mode-badge {
+      display: inline-block;
+      padding: var(--space-2xs) var(--space-sm);
+      font-size: var(--label-size);
+      font-weight: 800;
+      border-radius: var(--rounded);
+      background-color: var(--primary);
+      color: var(--on-primary);
+    }
+
+    .timer-mode-badge--break {
+      background-color: var(--accent);
+      color: var(--on-accent);
+    }
+
+    .timer-round-badge {
+      font-size: var(--label-size);
+      font-weight: 700;
+      color: var(--on-surface-variant);
+    }
+
+    .timer-clock {
+      font-size: clamp(2.75rem, 2rem + 3vw, 3.75rem);
+      font-weight: 800;
+      line-height: 1.05;
+      color: var(--primary);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+    }
+
+    .timer-status-banner {
+      font-size: var(--body-size);
+      font-weight: 700;
+      color: var(--accent);
+      min-height: 1.5em;
+    }
+
+    .timer-status-banner:empty {
+      display: none;
+    }
+
+    .timer-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .checkbox-label {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      min-height: 44px;
+      font-size: var(--small-size);
+      font-weight: 700;
+      color: var(--on-surface);
+      cursor: pointer;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    /* Footer & References */
+    .site-footer {
+      border-top: 3px solid var(--primary);
+      padding-top: var(--space-lg);
+      display: grid;
+      gap: var(--space-md);
+      color: var(--on-surface-variant);
+      font-size: var(--small-size);
+    }
+
+    .footer-credits {
+      display: grid;
+      gap: var(--space-xs);
+    }
+
+    .references-details {
+      background-color: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      padding: var(--space-sm) var(--space-md);
+    }
+
+    .references-summary {
+      font-weight: 700;
+      color: var(--primary);
+      cursor: pointer;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      font-size: var(--body-size);
+    }
+
+    .references-list {
+      margin: var(--space-md) 0 var(--space-xs);
+      padding-left: var(--space-lg);
+      display: grid;
+      gap: var(--space-sm);
+      color: var(--on-surface);
+      font-size: var(--label-size);
+      line-height: 1.5;
+    }
+
+    .references-list li {
+      overflow-wrap: anywhere;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+      .page-grid {
+        padding: var(--space-md) var(--space-sm) var(--space-xl);
+        gap: var(--space-xl);
+      }
+
+      .picker-btn {
+        padding: var(--space-md);
+      }
+
+      .loop-container {
+        padding: var(--space-md) var(--space-sm);
+      }
+
+      .loop-diagram {
+        gap: var(--space-xs);
+      }
+
+      .loop-node {
+        padding: var(--space-xs) var(--space-xs);
+        font-size: var(--label-size);
+      }
+
+      .loop-center {
+        padding: var(--space-xs);
+        font-size: 0.8125rem;
+      }
+
+      .loop-arrow svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .timer-settings {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <div class="page-shell">
+    <div class="page-grid">
+
+      <header class="site-header">
+        <div class="site-header-accent" aria-hidden="true"></div>
+        <h1>Getting Unstuck</h1>
+        <p class="site-subtitle">Your toolkit for managing procrastination</p>
+        <p class="site-lead">Stuck right now? Pick what fits, and try one small step.</p>
+      </header>
+
+      <main id="main-content" class="content-section" style="gap: var(--space-2xl);">
+
+        <!-- Section 1: The picker -->
+        <section class="content-section" aria-labelledby="heading-picker">
+          <div class="section-head">
+            <h2 id="heading-picker">What's getting in your way?</h2>
+          </div>
+
+          <div class="picker-grid" role="group" aria-label="Choose what is getting in your way">
+            <button type="button" class="picker-btn" data-picker="too-big" aria-pressed="false" onclick="selectPicker('too-big', this)">
+              <svg class="picker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="4"></rect>
+                <rect x="3" y="10" width="18" height="4"></rect>
+                <rect x="3" y="16" width="12" height="4"></rect>
+              </svg>
+              <span class="picker-btn-label">The task feels too big</span>
+            </button>
+
+            <button type="button" class="picker-btn" data-picker="cant-focus" aria-pressed="false" onclick="selectPicker('cant-focus', this)">
+              <svg class="picker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true">
+                <circle cx="12" cy="12" r="8"></circle>
+                <circle cx="12" cy="12" r="3"></circle>
+                <line x1="12" y1="2" x2="12" y2="5"></line>
+                <line x1="12" y1="19" x2="12" y2="22"></line>
+              </svg>
+              <span class="picker-btn-label">I can't focus</span>
+            </button>
+
+            <button type="button" class="picker-btn" data-picker="not-sticking" aria-pressed="false" onclick="selectPicker('not-sticking', this)">
+              <svg class="picker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true">
+                <path d="M4 5h7v14H4z"></path>
+                <path d="M13 5h7v14h-7z"></path>
+              </svg>
+              <span class="picker-btn-label">Studying isn't sticking</span>
+            </button>
+
+            <button type="button" class="picker-btn" data-picker="cant-start" aria-pressed="false" onclick="selectPicker('cant-start', this)">
+              <svg class="picker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true">
+                <polygon points="6,4 20,12 6,20"></polygon>
+              </svg>
+              <span class="picker-btn-label">I can't make myself start</span>
+            </button>
+
+            <button type="button" class="picker-btn" data-picker="already-slipped" aria-pressed="false" onclick="selectPicker('already-slipped', this)">
+              <svg class="picker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true">
+                <polyline points="3,10 3,4 9,4"></polyline>
+                <path d="M3.5 10a9 9 0 1 1 2.2 8.5"></path>
+              </svg>
+              <span class="picker-btn-label">I already slipped</span>
+            </button>
+
+            <button type="button" class="picker-btn" data-picker="dont-know" aria-pressed="false" onclick="jumpToLoop()">
+              <svg class="picker-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M9.5 9.5a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4"></path>
+                <line x1="12" y1="17" x2="12" y2="17.5"></line>
+              </svg>
+              <span class="picker-btn-label">I don't know why I'm stuck</span>
+            </button>
+          </div>
+
+          <div id="picker-results" class="picker-results" tabindex="-1" aria-labelledby="picker-results-heading" hidden>
+            <div class="picker-results-header">
+              <h3 id="picker-results-heading" class="picker-results-title"></h3>
+              <button type="button" class="btn btn-secondary" onclick="clearPicker()">Clear selection</button>
+            </div>
+            <div id="picker-cards" class="card-grid"></div>
+          </div>
+
+          <div class="picker-footer-row">
+            <p class="picker-help-line">
+              Does it feel like more than procrastination? See &ldquo;<a href="#strategy-18" onclick="jumpToReachOut(event)">Reach Out for Help</a>.&rdquo;
+            </p>
+            <a class="show-all-link" href="#all-strategies" onclick="jumpToAllStrategies(event)">Show all strategies</a>
+          </div>
+        </section>
+
+        <!-- Section 2: The procrastination loop -->
+        <section id="procrastination-loop" class="content-section" aria-labelledby="heading-loop">
+          <div class="section-head">
+            <h2 id="heading-loop" tabindex="-1">The Procrastination Loop</h2>
+          </div>
+
+          <div class="loop-container">
+            <div class="loop-diagram" role="group" aria-label="The Procrastination Loop diagram">
+              <div class="loop-node loop-node--task">Task</div>
+
+              <div class="loop-arrow loop-arrow--tr" aria-hidden="true">
+                <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M6 10 C18 10, 26 18, 26 28"></path>
+                  <polyline points="20,23 26,29 31,22"></polyline>
+                </svg>
+              </div>
+
+              <div class="loop-node loop-node--feeling">Bad feeling</div>
+
+              <div class="loop-arrow loop-arrow--br" aria-hidden="true">
+                <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M26 6 C26 18, 18 26, 8 26"></path>
+                  <polyline points="14,20 7,26 14,31"></polyline>
+                </svg>
+              </div>
+
+              <div class="loop-node loop-node--delay">Delay</div>
+
+              <div class="loop-arrow loop-arrow--bl" aria-hidden="true">
+                <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M30 26 C18 26, 10 18, 10 8"></path>
+                  <polyline points="5,14 10,7 16,13"></polyline>
+                </svg>
+              </div>
+
+              <div class="loop-node loop-node--relief">Relief</div>
+
+              <div class="loop-arrow loop-arrow--tl" aria-hidden="true">
+                <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M10 30 C10 18, 18 10, 28 10"></path>
+                  <polyline points="22,5 29,10 23,16"></polyline>
+                </svg>
+              </div>
+
+              <div class="loop-center">How I feel now &gt; My goals for later</div>
+            </div>
+
+            <p class="sr-only">Task leads to a bad feeling. The bad feeling leads to delay. Delay brings relief. Relief leads back to the task.</p>
+
+            <p class="loop-explanation">
+              Procrastination is about feelings, not laziness. A task gives you a bad feeling, so you delay to feel better now. The relief makes you want to delay again next time. <span class="citation-inline">(Sirois &amp; Pychyl, 2013)</span>
+            </p>
+          </div>
+
+          <div class="feeling-chooser">
+            <h3>Name the feeling. What do you feel right before you put it off?</h3>
+            <div class="feeling-buttons" role="group" aria-label="Choose a feeling">
+              <button type="button" class="feeling-btn" data-feeling="bored" aria-pressed="false" onclick="selectFeeling('bored', this)">Bored</button>
+              <button type="button" class="feeling-btn" data-feeling="confused" aria-pressed="false" onclick="selectFeeling('confused', this)">Confused</button>
+              <button type="button" class="feeling-btn" data-feeling="worried" aria-pressed="false" onclick="selectFeeling('worried', this)">Worried</button>
+              <button type="button" class="feeling-btn" data-feeling="overwhelmed" aria-pressed="false" onclick="selectFeeling('overwhelmed', this)">Overwhelmed</button>
+            </div>
+            <div id="feeling-move" class="feeling-move" aria-live="polite" hidden></div>
+          </div>
+        </section>
+
+        <!-- Section 3: Strategy cards -->
+        <section id="all-strategies" class="content-section" aria-labelledby="heading-strategies">
+          <div class="section-head">
+            <h2 id="heading-strategies" tabindex="-1">All Strategies</h2>
+          </div>
+
+          <ul class="star-legend" aria-label="Star rating legend">
+            <li>
+              <span class="stars-visual" aria-hidden="true">★★★</span>
+              <span class="sr-only">3 out of 3 stars:</span>
+              <span>Strong evidence: many studies support it</span>
+            </li>
+            <li>
+              <span class="stars-visual" aria-hidden="true">★★</span>
+              <span class="sr-only">2 out of 3 stars:</span>
+              <span>Growing evidence: some good studies support it</span>
+            </li>
+            <li>
+              <span class="stars-visual" aria-hidden="true">★</span>
+              <span class="sr-only">1 out of 3 stars:</span>
+              <span>Worth a try: a practical idea that research hasn't tested much yet</span>
+            </li>
+          </ul>
+
+          <div class="filters-panel">
+            <div class="filter-groups">
+              <fieldset class="filter-group">
+                <legend>Filter by star rating</legend>
+                <div class="filter-pills">
+                  <button type="button" class="filter-btn" data-star-filter="all" aria-pressed="true" onclick="setStarFilter('all', this)">All</button>
+                  <button type="button" class="filter-btn" data-star-filter="3" aria-pressed="false" onclick="setStarFilter('3', this)">
+                    <span class="stars-visual" aria-hidden="true">★★★</span><span class="sr-only">3 out of 3 stars</span>
+                  </button>
+                  <button type="button" class="filter-btn" data-star-filter="2" aria-pressed="false" onclick="setStarFilter('2', this)">
+                    <span class="stars-visual" aria-hidden="true">★★</span><span class="sr-only">2 out of 3 stars</span>
+                  </button>
+                  <button type="button" class="filter-btn" data-star-filter="1" aria-pressed="false" onclick="setStarFilter('1', this)">
+                    <span class="stars-visual" aria-hidden="true">★</span><span class="sr-only">1 out of 3 stars</span>
+                  </button>
+                </div>
+              </fieldset>
+
+              <fieldset class="filter-group">
+                <legend>Filter by video</legend>
+                <div class="filter-pills">
+                  <button type="button" class="filter-btn" data-video-filter="all" aria-pressed="true" onclick="setVideoFilter('all', this)">All</button>
+                  <button type="button" class="filter-btn" data-video-filter="2" aria-pressed="false" onclick="setVideoFilter('2', this)">Video 2</button>
+                  <button type="button" class="filter-btn" data-video-filter="3" aria-pressed="false" onclick="setVideoFilter('3', this)">Video 3</button>
+                  <button type="button" class="filter-btn" data-video-filter="4" aria-pressed="false" onclick="setVideoFilter('4', this)">Video 4</button>
+                  <button type="button" class="filter-btn" data-video-filter="5" aria-pressed="false" onclick="setVideoFilter('5', this)">Video 5</button>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="filter-status-row">
+              <p id="filter-count" aria-live="polite">Showing 18 of 18 strategies</p>
+              <button type="button" id="reset-filters-btn" class="btn btn-secondary" onclick="resetAllFilters()" hidden>Reset filters</button>
+            </div>
+          </div>
+
+          <div id="strategy-grid" class="card-grid"></div>
+          <div id="empty-filter-state" class="empty-results" hidden>
+            <p>No strategies match both filters together.</p>
+            <button type="button" class="btn btn-primary" onclick="resetAllFilters()">Reset filters</button>
+          </div>
+        </section>
+
+        <!-- Section 4: Tools -->
+        <section class="content-section" aria-label="Action tools">
+          <div class="tools-grid">
+
+            <!-- Tool 1: If-then plan builder -->
+            <section class="tool-panel" aria-labelledby="heading-ifthen">
+              <div class="tool-header">
+                <h2 id="heading-ifthen">Build Your If-Then Plan</h2>
+                <p class="tool-lead">Pick a time, a place, and one small action.</p>
+              </div>
+
+              <div class="form-fields">
+                <div class="field-group" id="group-when">
+                  <label class="field-label" for="input-when">When?</label>
+                  <input type="text" id="input-when" class="text-input" placeholder="Tuesday at 3 pm" aria-describedby="err-when" oninput="clearFieldError('when')">
+                  <p id="err-when" class="field-error" aria-live="polite"></p>
+                </div>
+
+                <div class="field-group" id="group-where">
+                  <label class="field-label" for="input-where">Where?</label>
+                  <input type="text" id="input-where" class="text-input" placeholder="the library" aria-describedby="err-where" oninput="clearFieldError('where')">
+                  <p id="err-where" class="field-error" aria-live="polite"></p>
+                </div>
+
+                <div class="field-group" id="group-what">
+                  <label class="field-label" for="input-what">What will you do?</label>
+                  <input type="text" id="input-what" class="text-input" placeholder="outline Part 1" aria-describedby="err-what" oninput="clearFieldError('what')">
+                  <p id="err-what" class="field-error" aria-live="polite"></p>
+                </div>
+
+                <div>
+                  <button type="button" class="btn btn-primary" onclick="buildIfThenPlan()">Build my plan</button>
+                </div>
+              </div>
+
+              <div id="plan-output-box" class="plan-output-box" aria-live="polite" hidden>
+                <p id="plan-sentence" class="plan-sentence" tabindex="-1"></p>
+                <div class="plan-actions">
+                  <button type="button" class="btn btn-secondary" onclick="copyIfThenPlan()">Copy</button>
+                  <span id="copy-feedback" class="copy-feedback" aria-live="polite"></span>
+                </div>
+              </div>
+
+              <p class="tool-note">Add your plan to your calendar so it reminds you.</p>
+            </section>
+
+            <!-- Tool 2: Focus timer -->
+            <section class="tool-panel" aria-labelledby="heading-timer">
+              <div class="tool-header">
+                <h2 id="heading-timer">Focus Timer</h2>
+                <p class="tool-lead">Focus, then take a break. Adjust the times to fit you.</p>
+              </div>
+
+              <div class="timer-presets" role="group" aria-label="Timer quick settings">
+                <button type="button" class="btn btn-secondary" onclick="applyPresetFiveMin()">5-minute start</button>
+                <button type="button" class="btn btn-secondary" onclick="applyPresetPomodoro()">Pomodoro</button>
+              </div>
+
+              <div class="timer-settings">
+                <div class="field-group" id="group-focus-min">
+                  <label class="field-label" for="input-focus-min">Focus minutes</label>
+                  <input type="number" id="input-focus-min" class="number-input" min="5" max="60" value="25" aria-describedby="err-focus-min" onchange="handleDurationInputChange()">
+                  <p id="err-focus-min" class="field-error" aria-live="polite"></p>
+                </div>
+
+                <div class="field-group" id="group-break-min">
+                  <label class="field-label" for="input-break-min">Break minutes</label>
+                  <input type="number" id="input-break-min" class="number-input" min="1" max="30" value="5" aria-describedby="err-break-min" onchange="handleDurationInputChange()">
+                  <p id="err-break-min" class="field-error" aria-live="polite"></p>
+                </div>
+              </div>
+
+              <div class="timer-display-box">
+                <div class="timer-meta-row">
+                  <span id="timer-mode-badge" class="timer-mode-badge">Focus</span>
+                  <span id="timer-round-badge" class="timer-round-badge">Round 1</span>
+                </div>
+                <div id="timer-clock" class="timer-clock">25:00</div>
+                <p id="timer-status-banner" class="timer-status-banner"></p>
+              </div>
+
+              <div id="timer-sr-status" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+              <div class="timer-controls">
+                <button type="button" id="btn-timer-start" class="btn btn-primary" onclick="startTimer()">Start</button>
+                <button type="button" id="btn-timer-pause" class="btn btn-secondary" onclick="pauseTimer()" disabled>Pause</button>
+                <button type="button" id="btn-timer-reset" class="btn btn-secondary" onclick="resetTimer()">Reset</button>
+              </div>
+
+              <label class="checkbox-label" for="sound-toggle">
+                <input type="checkbox" id="sound-toggle">
+                <span>Sound on</span>
+              </label>
+            </section>
+
+          </div>
+        </section>
+
+      </main>
+
+      <footer class="site-footer">
+        <div class="footer-credits">
+          <p>Getting Unstuck video series by Dr. Shelli Wynants.</p>
+          <p>This site was built with Gemini Notebook from the video scripts and reviewed by the instructor.</p>
+        </div>
+
+        <details class="references-details">
+          <summary class="references-summary">References</summary>
+          <ul class="references-list">
+            <li>Cirillo, F. (2018). <em>The Pomodoro Technique: The life-changing time-management system</em>. Currency.</li>
+            <li>Dunlosky, J., Rawson, K. A., Marsh, E. J., Nathan, M. J., &amp; Willingham, D. T. (2013). Improving students' learning with effective learning techniques: Promising directions from cognitive and educational psychology. <em>Psychological Science in the Public Interest, 14</em>(1), 4–58. https://doi.org/10.1177/1529100612453266</li>
+            <li>Gollwitzer, P. M., &amp; Sheeran, P. (2006). Implementation intentions and goal achievement: A meta-analysis of effects and processes. <em>Advances in Experimental Social Psychology, 38</em>, 69–119. https://doi.org/10.1016/S0065-2601(06)38002-1</li>
+            <li>Milkman, K. L., Minson, J. A., &amp; Volpp, K. G. M. (2014). Holding the Hunger Games hostage at the gym: An evaluation of temptation bundling. <em>Management Science, 60</em>(2), 283–299. https://doi.org/10.1287/mnsc.2013.1784</li>
+            <li>Singh, B., Murphy, A., Maher, C., &amp; Smith, A. E. (2024). Time to form a habit: A systematic review and meta-analysis of health behaviour habit formation and its determinants. <em>Healthcare, 12</em>(23), 2488.</li>
+            <li>Sirois, F. M. (2014). Procrastination and stress: Exploring the role of self-compassion. <em>Self and Identity, 13</em>(2), 128–145. https://doi.org/10.1080/15298868.2013.763404</li>
+            <li>Sirois, F., &amp; Pychyl, T. (2013). Procrastination and the priority of short-term mood regulation: Consequences for future self. <em>Social and Personality Psychology Compass, 7</em>(2), 115–127. https://doi.org/10.1111/spc3.12011</li>
+            <li>van Eerde, W., &amp; Klingsieck, K. B. (2018). Overcoming procrastination? A meta-analysis of intervention studies. <em>Educational Research Review, 25</em>, 73–85. https://doi.org/10.1016/j.edurev.2018.09.002</li>
+            <li>Wohl, M. J. A., Pychyl, T. A., &amp; Bennett, S. H. (2010). I forgive myself, now I can study: How self-forgiveness for procrastinating can reduce future procrastination. <em>Personality and Individual Differences, 48</em>(7), 803–808. https://doi.org/10.1016/j.paid.2010.01.029</li>
+          </ul>
+        </details>
+      </footer>
+
+    </div>
+  </div>
+
+  <script>
+    const STRATEGIES = [
+      {
+        id: 1,
+        name: `Break It Down`,
+        stars: 1,
+        video: 2,
+        fields: [
+          { label: `What it is:`, text: `Turn a big, unclear task into small, clear steps.` },
+          { label: `How to do it:`, text: `List the parts of the task. For the first part, write the next physical action, such as "Open the doc and type three ideas." Do only that action.` },
+          { label: `Try it today:`, text: `Pick one task and write its next physical action.` }
+        ],
+        citation: ``
+      },
+      {
+        id: 2,
+        name: `The 5-Minute Start`,
+        stars: 1,
+        video: 2,
+        fields: [
+          { label: `What it is:`, text: `Agree to work on a task for just five minutes.` },
+          { label: `How to do it:`, text: `Set a timer for 5 minutes. Work until it ends. Then decide whether to keep going or stop.` },
+          { label: `Try it today:`, text: `Set the focus timer below to 5 minutes and start.` }
+        ],
+        citation: ``
+      },
+      {
+        id: 3,
+        name: `If-Then Plans`,
+        stars: 3,
+        video: 2,
+        fields: [
+          { label: `What it is:`, text: `Link a specific time and place to a specific action, so you decide to start in advance.` },
+          { label: `How to do it:`, text: `Pick a time, a place, and one action. Example: "If it is Tuesday at 3 pm, then I will go to the library and outline Part 1."` },
+          { label: `Try it today:`, text: `Use the if-then plan builder below.` }
+        ],
+        citation: `(Gollwitzer & Sheeran, 2006)`
+      },
+      {
+        id: 4,
+        name: `Spread It Across the Week`,
+        stars: 1,
+        video: 2,
+        fields: [
+          { label: `What it is:`, text: `Give each part of a task its own short time block.` },
+          { label: `How to do it:`, text: `Look at your syllabus or course calendar. Break big tasks into parts. Put each part on your calendar.` },
+          { label: `Try it today:`, text: `Schedule one part of your biggest task this week.` }
+        ],
+        citation: ``
+      },
+      {
+        id: 5,
+        name: `Know Your Peak Times`,
+        stars: 1,
+        video: 2,
+        fields: [
+          { label: `What it is:`, text: `Do your hardest work when your focus is best.` },
+          { label: `How to do it:`, text: `Notice when you feel sharp and when you slump. Put hard work in your peak times and easy tasks in your slump times. Test easy-first and hard-first, and keep what works.` },
+          { label: `Try it today:`, text: `Write down when you feel most focused today.` }
+        ],
+        citation: ``
+      },
+      {
+        id: 6,
+        name: `Generative AI as a Planning Partner`,
+        stars: 1,
+        video: 2,
+        fields: [
+          { label: `What it is:`, text: `Use generative AI to plan the steps, not to avoid the work.` },
+          { label: `How to do it:`, text: `Ask a generative AI tool to break your assignment into steps. AI only knows what you tell it, so check the plan against your assignment and course details. Follow your instructor's AI policy.` },
+          { label: `Try it today:`, text: `Ask for a step list, then compare it with your assignment instructions.` }
+        ],
+        citation: ``
+      },
+      {
+        id: 7,
+        name: `Spaced Practice`,
+        stars: 3,
+        video: 3,
+        fields: [
+          { label: `What it is:`, text: `Study in shorter sessions across several days instead of one long session.` },
+          { label: `How to do it:`, text: `Split your study time into blocks of about an hour. Spread them across the week. Avoid one long session the night before.` },
+          { label: `Try it today:`, text: `Plan three short study sessions for your next exam.` }
+        ],
+        citation: `(Dunlosky et al., 2013)`
+      },
+      {
+        id: 8,
+        name: `Self-Testing`,
+        stars: 3,
+        video: 3,
+        fields: [
+          { label: `What it is:`, text: `Pull information out of your memory instead of reading it again.` },
+          { label: `How to do it:`, text: `Close your notes and write what you remember. Use flashcards. Answer practice questions. Explain it out loud.` },
+          { label: `Try it today:`, text: `At the end of your next study session, close your notes and recall what you studied.` }
+        ],
+        citation: `(Dunlosky et al., 2013)`
+      },
+      {
+        id: 9,
+        name: `The Pomodoro Technique`,
+        stars: 1,
+        video: 3,
+        fields: [
+          { label: `What it is:`, text: `Focus for 25 minutes, then take a 5-minute break.` },
+          { label: `How to do it:`, text: `Remove distractions. Focus on one task for 25 minutes. Take a 5-minute break. After 3–4 rounds, take a longer break. Adjust the times to fit you.` },
+          { label: `Try it today:`, text: `Use the focus timer below.` }
+        ],
+        citation: `(Cirillo, 2018)`
+      },
+      {
+        id: 10,
+        name: `Pick a Regular Study Spot`,
+        stars: 1,
+        video: 4,
+        fields: [
+          { label: `What it is:`, text: `A regular study spot becomes a cue to start working.` },
+          { label: `How to do it:`, text: `Look for good light and a clear space. Avoid your bed. Ideas: library, empty classroom, kitchen table, a quiet corner with headphones.` },
+          { label: `Try it today:`, text: `Choose your study spot for this week.` }
+        ],
+        citation: ``
+      },
+      {
+        id: 11,
+        name: `Put Distance Between You and Distractions`,
+        stars: 1,
+        video: 4,
+        fields: [
+          { label: `What it is:`, text: `Make distractions harder to reach. Even one extra step gives you a moment to choose.` },
+          { label: `How to do it:`, text: `Put your phone in another room. Turn on focus or do-not-disturb mode. Move tempting apps off your home screen. Close extra tabs.` },
+          { label: `Try it today:`, text: `Put your phone out of reach for one study session.` }
+        ],
+        citation: ``
+      },
+      {
+        id: 12,
+        name: `Temptation Bundling`,
+        stars: 2,
+        video: 4,
+        fields: [
+          { label: `What it is:`, text: `Enjoy something you like only while you do a task you tend to avoid.` },
+          { label: `How to do it:`, text: `Pick something you enjoy, such as a favorite playlist or coffee drink. Allow it only while you study. It helped people exercise more, so try it with studying.` },
+          { label: `Try it today:`, text: `Choose one playlist for study time only.` }
+        ],
+        citation: `(Milkman et al., 2014)`
+      },
+      {
+        id: 13,
+        name: `Plan Small Rewards`,
+        stars: 1,
+        video: 4,
+        fields: [
+          { label: `What it is:`, text: `Decide before you start what you'll get when you finish.` },
+          { label: `How to do it:`, text: `Complete the sentence "After I finish ___, I get ___." Write it on a sticky note. Match the reward to the task: small rewards for small tasks, bigger rewards for hard ones.` },
+          { label: `Try it today:`, text: `Plan one reward for your next task.` }
+        ],
+        citation: ``
+      },
+      {
+        id: 14,
+        name: `Get Accountability`,
+        stars: 1,
+        video: 4,
+        fields: [
+          { label: `What it is:`, text: `Bring other people into your plan.` },
+          { label: `How to do it:`, text: `Join a study group, ask a partner to check in, try virtual co-working, use tutoring and writing centers, or go to office hours.` },
+          { label: `Try it today:`, text: `Tell one person what you plan to finish this week.` }
+        ],
+        citation: ``
+      },
+      {
+        id: 15,
+        name: `Self-Forgiveness`,
+        stars: 2,
+        video: 5,
+        fields: [
+          { label: `What it is:`, text: `After a slip, be kind to yourself and move forward. Self-forgiveness is not an excuse.` },
+          { label: `How to do it:`, text: `Name it ("I put off studying for the quiz"). Own it ("That cost me sleep and points"). Plan the next step with an if-then plan. Then let it go.` },
+          { label: `Try it today:`, text: `Write one kind sentence to yourself and one next step.` }
+        ],
+        citation: `(Wohl et al., 2010; Sirois, 2014)`
+      },
+      {
+        id: 16,
+        name: `The Weekly Reset`,
+        stars: 1,
+        video: 5,
+        fields: [
+          { label: `What it is:`, text: `A 10-minute check-in, once a week, so slips don't pile up.` },
+          { label: `How to do it:`, text: `Look at the week ahead. Choose first steps for big tasks. Set if-then plans. Plan rewards.` },
+          { label: `Try it today:`, text: `Pick a day and time for your weekly reset.` }
+        ],
+        citation: ``
+      },
+      {
+        id: 17,
+        name: `Be Patient`,
+        stars: 2,
+        video: 5,
+        fields: [
+          { label: `What it is:`, text: `New habits often take about 2 months to form, and sometimes longer.` },
+          { label: `How to do it:`, text: `Pick one or two strategies and keep using them, even when they don't feel automatic yet.` },
+          { label: `Try it today:`, text: `Choose the one strategy you will practice this month.` }
+        ],
+        citation: `(Singh et al., 2024)`
+      },
+      {
+        id: 18,
+        name: `Reach Out for Help`,
+        stars: 3,
+        video: 5,
+        fields: [
+          { label: `What it is:`, text: `Programs and counseling that target procrastination reduce it.` },
+          { label: `When to reach out:`, text: `If procrastination shows up in every part of your life, or comes with constant low mood, constant worry, or trouble focusing.` },
+          { label: `Where to go:`, isWhereToGo: true }
+        ],
+        citation: `(van Eerde & Klingsieck, 2018)`
+      }
+    ];
+
+    const PICKER_MAP = {
+      'too-big': {
+        label: `The task feels too big`,
+        ids: [1, 2, 3]
+      },
+      'cant-focus': {
+        label: `I can't focus`,
+        ids: [11, 9, 10]
+      },
+      'not-sticking': {
+        label: `Studying isn't sticking`,
+        ids: [7, 8, 4]
+      },
+      'cant-start': {
+        label: `I can't make myself start`,
+        ids: [13, 12, 14]
+      },
+      'already-slipped': {
+        label: `I already slipped`,
+        ids: [15, 16, 17]
+      }
+    };
+
+    const FEELING_MOVES = {
+      bored: {
+        name: `Bored`,
+        move: `Try temptation bundling: save a favorite playlist only for this task.`
+      },
+      confused: {
+        name: `Confused`,
+        move: `Write one question about the task, and ask your instructor or a classmate.`
+      },
+      worried: {
+        name: `Worried`,
+        move: `Try the 5-minute start. Once you begin, the task often feels less unpleasant.`
+      },
+      overwhelmed: {
+        name: `Overwhelmed`,
+        move: `Break it down. Write only the next physical action, and do just that.`
+      }
+    };
+
+    let activePickerKey = null;
+    let activeStarFilter = `all`;
+    let activeVideoFilter = `all`;
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, `&amp;`)
+        .replace(/</g, `&lt;`)
+        .replace(/>/g, `&gt;`)
+        .replace(/"/g, `&quot;`)
+        .replace(/'/g, `&#39;`);
+    }
+
+    function buildStarsHtml(count) {
+      const symbols = `★`.repeat(count);
+      return `<span class="stars-visual" aria-hidden="true">${symbols}</span><span class="sr-only">${count} out of 3 stars</span>`;
+    }
+
+    function buildWhereToGoHtml() {
+      return `<a href="https://www.fullerton.edu/caps/" target="_blank" rel="noopener">Campus counseling (CAPS)</a>, <a href="https://www.fullerton.edu/titanhealth/" target="_blank" rel="noopener">Health center</a>, <a href="https://www.fullerton.edu/dss/" target="_blank" rel="noopener">Disability Support Services</a>, <a href="https://www.fullerton.edu/ulc/" target="_blank" rel="noopener">Tutoring (University Learning Center)</a>, Your instructor.`;
+    }
+
+    function createStrategyCardElement(strategy, isPickerCopy) {
+      const article = document.createElement(`article`);
+      article.className = `strategy-card`;
+      if (!isPickerCopy) {
+        article.id = `strategy-${strategy.id}`;
+        article.setAttribute(`tabindex`, `-1`);
+      }
+
+      const fieldsHtml = strategy.fields.map(function (f) {
+        const valueHtml = f.isWhereToGo ? buildWhereToGoHtml() : escapeHtml(f.text);
+        return `<p class="card-field"><span class="card-field-label">${escapeHtml(f.label)}</span> ${valueHtml}</p>`;
+      }).join(``);
+
+      const citationHtml = strategy.citation
+        ? `<p class="card-citation">${escapeHtml(strategy.citation)}</p>`
+        : ``;
+
+      article.innerHTML = `
+        <div class="card-header">
+          <div class="card-meta">
+            <div>${buildStarsHtml(strategy.stars)}</div>
+            <span class="video-tag">Video ${strategy.video}</span>
+          </div>
+          <h3>${escapeHtml(strategy.name)}</h3>
+        </div>
+        <div class="card-body">
+          ${fieldsHtml}
+        </div>
+        ${citationHtml}
+      `;
+
+      return article;
+    }
+
+    function selectPicker(key, btnEl) {
+      const config = PICKER_MAP[key];
+      if (!config) return;
+
+      const allButtons = document.querySelectorAll(`.picker-btn`);
+      allButtons.forEach(function (btn) {
+        btn.setAttribute(`aria-pressed`, btn === btnEl ? `true` : `false`);
+      });
+
+      activePickerKey = key;
+
+      const resultsBox = document.getElementById(`picker-results`);
+      const heading = document.getElementById(`picker-results-heading`);
+      const container = document.getElementById(`picker-cards`);
+      if (!resultsBox || !heading || !container) return;
+
+      heading.textContent = config.label;
+      container.innerHTML = ``;
+
+      config.ids.forEach(function (id) {
+        const strat = STRATEGIES.find(function (s) { return s.id === id; });
+        if (strat) {
+          container.appendChild(createStrategyCardElement(strat, true));
+        }
+      });
+
+      resultsBox.hidden = false;
+      resultsBox.focus();
+    }
+
+    function clearPicker() {
+      activePickerKey = null;
+      const allButtons = document.querySelectorAll(`.picker-btn`);
+      allButtons.forEach(function (btn) {
+        btn.setAttribute(`aria-pressed`, `false`);
+      });
+      const resultsBox = document.getElementById(`picker-results`);
+      if (resultsBox) {
+        resultsBox.hidden = true;
+      }
+    }
+
+    function jumpToLoop() {
+      clearPicker();
+      const target = document.getElementById(`heading-loop`);
+      if (target) {
+        target.scrollIntoView({ behavior: `smooth`, block: `start` });
+        target.focus({ preventScroll: true });
+      }
+    }
+
+    function jumpToAllStrategies(event) {
+      if (event) event.preventDefault();
+      const target = document.getElementById(`heading-strategies`);
+      if (target) {
+        target.scrollIntoView({ behavior: `smooth`, block: `start` });
+        target.focus({ preventScroll: true });
+      }
+    }
+
+    function jumpToReachOut(event) {
+      if (event) event.preventDefault();
+      if (activeStarFilter !== `all` || activeVideoFilter !== `all`) {
+        resetAllFilters();
+      }
+      const card = document.getElementById(`strategy-18`);
+      if (card) {
+        card.classList.add(`strategy-card--highlight`);
+        card.scrollIntoView({ behavior: `smooth`, block: `center` });
+        card.focus({ preventScroll: true });
+      }
+    }
+
+    function selectFeeling(key, btnEl) {
+      const info = FEELING_MOVES[key];
+      if (!info) return;
+
+      const btns = document.querySelectorAll(`.feeling-btn`);
+      btns.forEach(function (b) {
+        b.setAttribute(`aria-pressed`, b === btnEl ? `true` : `false`);
+      });
+
+      const out = document.getElementById(`feeling-move`);
+      if (!out) return;
+      out.innerHTML = `<span class="feeling-move-label">${escapeHtml(info.name)}:</span> ${escapeHtml(info.move)}`;
+      out.hidden = false;
+    }
+
+    function renderStrategyCards() {
+      const grid = document.getElementById(`strategy-grid`);
+      const countEl = document.getElementById(`filter-count`);
+      const emptyEl = document.getElementById(`empty-filter-state`);
+      const resetBtn = document.getElementById(`reset-filters-btn`);
+      if (!grid || !countEl || !emptyEl || !resetBtn) return;
+
+      const filtered = STRATEGIES.filter(function (s) {
+        const starMatch = activeStarFilter === `all` || String(s.stars) === activeStarFilter;
+        const videoMatch = activeVideoFilter === `all` || String(s.video) === activeVideoFilter;
+        return starMatch && videoMatch;
+      });
+
+      grid.innerHTML = ``;
+      filtered.forEach(function (strat) {
+        grid.appendChild(createStrategyCardElement(strat, false));
+      });
+
+      const noun = filtered.length === 1 ? `strategy` : `strategies`;
+      countEl.textContent = `Showing ${filtered.length} of ${STRATEGIES.length} ${noun}`;
+
+      const isFiltered = activeStarFilter !== `all` || activeVideoFilter !== `all`;
+      resetBtn.hidden = !isFiltered;
+      emptyEl.hidden = filtered.length > 0;
+    }
+
+    function setStarFilter(val, btnEl) {
+      activeStarFilter = val;
+      const btns = document.querySelectorAll(`[data-star-filter]`);
+      btns.forEach(function (b) {
+        b.setAttribute(`aria-pressed`, b === btnEl ? `true` : `false`);
+      });
+      renderStrategyCards();
+    }
+
+    function setVideoFilter(val, btnEl) {
+      activeVideoFilter = val;
+      const btns = document.querySelectorAll(`[data-video-filter]`);
+      btns.forEach(function (b) {
+        b.setAttribute(`aria-pressed`, b === btnEl ? `true` : `false`);
+      });
+      renderStrategyCards();
+    }
+
+    function resetAllFilters() {
+      activeStarFilter = `all`;
+      activeVideoFilter = `all`;
+      document.querySelectorAll(`[data-star-filter]`).forEach(function (b) {
+        b.setAttribute(`aria-pressed`, b.dataset.starFilter === `all` ? `true` : `false`);
+      });
+      document.querySelectorAll(`[data-video-filter]`).forEach(function (b) {
+        b.setAttribute(`aria-pressed`, b.dataset.videoFilter === `all` ? `true` : `false`);
+      });
+      renderStrategyCards();
+    }
+
+    /* Tool 1: If-Then Plan Builder */
+    function clearFieldError(fieldName) {
+      const input = document.getElementById(`input-${fieldName}`);
+      const err = document.getElementById(`err-${fieldName}`);
+      const group = document.getElementById(`group-${fieldName}`);
+      if (input) input.removeAttribute(`aria-invalid`);
+      if (err) err.textContent = ``;
+      if (group) group.classList.remove(`field-group--error`);
+    }
+
+    function setFieldError(fieldName, message) {
+      const input = document.getElementById(`input-${fieldName}`);
+      const err = document.getElementById(`err-${fieldName}`);
+      const group = document.getElementById(`group-${fieldName}`);
+      if (input) input.setAttribute(`aria-invalid`, `true`);
+      if (err) err.textContent = message;
+      if (group) group.classList.add(`field-group--error`);
+    }
+
+    function buildIfThenPlan() {
+      const whenEl = document.getElementById(`input-when`);
+      const whereEl = document.getElementById(`input-where`);
+      const whatEl = document.getElementById(`input-what`);
+      const outBox = document.getElementById(`plan-output-box`);
+      const sentenceEl = document.getElementById(`plan-sentence`);
+      const feedbackEl = document.getElementById(`copy-feedback`);
+      if (!whenEl || !whereEl || !whatEl || !outBox || !sentenceEl || !feedbackEl) return;
+
+      const whenVal = whenEl.value.trim();
+      const whereVal = whereEl.value.trim();
+      const whatVal = whatEl.value.trim();
+
+      let firstMissing = null;
+
+      if (!whenVal) {
+        setFieldError(`when`, `Please add when you will do this.`);
+        if (!firstMissing) firstMissing = whenEl;
+      } else {
+        clearFieldError(`when`);
+      }
+
+      if (!whereVal) {
+        setFieldError(`where`, `Please add where you will be.`);
+        if (!firstMissing) firstMissing = whereEl;
+      } else {
+        clearFieldError(`where`);
+      }
+
+      if (!whatVal) {
+        setFieldError(`what`, `Please add one small action.`);
+        if (!firstMissing) firstMissing = whatEl;
+      } else {
+        clearFieldError(`what`);
+      }
+
+      if (firstMissing) {
+        outBox.hidden = true;
+        firstMissing.focus();
+        return;
+      }
+
+      const cleanWhat = whatVal.replace(/\.+$/, ``);
+      sentenceEl.textContent = `If it is ${whenVal} and I am at ${whereVal}, then I will ${cleanWhat}.`;
+      feedbackEl.textContent = ``;
+      outBox.hidden = false;
+      sentenceEl.focus();
+    }
+
+    function selectPlanText(el) {
+      try {
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        const sel = window.getSelection();
+        if (sel) {
+          sel.removeAllRanges();
+          sel.addRange(range);
+        }
+      } catch (e) {
+        /* ignore selection errors */
+      }
+    }
+
+    function copyIfThenPlan() {
+      const sentenceEl = document.getElementById(`plan-sentence`);
+      const feedbackEl = document.getElementById(`copy-feedback`);
+      if (!sentenceEl || !feedbackEl) return;
+
+      const text = sentenceEl.textContent || ``;
+      if (!text) return;
+
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === `function`) {
+        navigator.clipboard.writeText(text).then(function () {
+          feedbackEl.textContent = `Copied!`;
+        }).catch(function () {
+          selectPlanText(sentenceEl);
+          feedbackEl.textContent = `Text selected — press Ctrl+C or Cmd+C to copy.`;
+        });
+      } else {
+        selectPlanText(sentenceEl);
+        try {
+          const ok = document.execCommand && document.execCommand(`copy`);
+          feedbackEl.textContent = ok ? `Copied!` : `Text selected — press Ctrl+C or Cmd+C to copy.`;
+        } catch (e) {
+          feedbackEl.textContent = `Text selected — press Ctrl+C or Cmd+C to copy.`;
+        }
+      }
+    }
+
+    /* Tool 2: Focus Timer */
+    const timerState = {
+      mode: `focus`,
+      round: 1,
+      focusMinutes: 25,
+      breakMinutes: 5,
+      remainingMs: 25 * 60 * 1000,
+      endTime: null,
+      intervalId: null,
+      running: false
+    };
+
+    function clampMinutes(val, min, max, fallback) {
+      const num = parseInt(val, 10);
+      if (isNaN(num)) return fallback;
+      if (num < min) return min;
+      if (num > max) return max;
+      return num;
+    }
+
+    function readTimerInputs() {
+      const focusInput = document.getElementById(`input-focus-min`);
+      const breakInput = document.getElementById(`input-break-min`);
+      const focusErr = document.getElementById(`err-focus-min`);
+      const breakErr = document.getElementById(`err-break-min`);
+      if (!focusInput || !breakInput) return;
+
+      const rawFocus = parseInt(focusInput.value, 10);
+      const rawBreak = parseInt(breakInput.value, 10);
+
+      if (isNaN(rawFocus) || rawFocus < 5 || rawFocus > 60) {
+        timerState.focusMinutes = clampMinutes(rawFocus, 5, 60, 25);
+        focusInput.value = String(timerState.focusMinutes);
+        if (focusErr) focusErr.textContent = `Choose 5 to 60 minutes.`;
+      } else {
+        timerState.focusMinutes = rawFocus;
+        if (focusErr) focusErr.textContent = ``;
+      }
+
+      if (isNaN(rawBreak) || rawBreak < 1 || rawBreak > 30) {
+        timerState.breakMinutes = clampMinutes(rawBreak, 1, 30, 5);
+        breakInput.value = String(timerState.breakMinutes);
+        if (breakErr) breakErr.textContent = `Choose 1 to 30 minutes.`;
+      } else {
+        timerState.breakMinutes = rawBreak;
+        if (breakErr) breakErr.textContent = ``;
+      }
+    }
+
+    function formatTimeMs(ms) {
+      const totalSeconds = Math.max(0, Math.ceil(ms / 1000));
+      const mins = Math.floor(totalSeconds / 60);
+      const secs = totalSeconds % 60;
+      return `${String(mins).padStart(2, `0`)}:${String(secs).padStart(2, `0`)}`;
+    }
+
+    function updateTimerDisplay() {
+      const clockEl = document.getElementById(`timer-clock`);
+      const modeBadge = document.getElementById(`timer-mode-badge`);
+      const roundBadge = document.getElementById(`timer-round-badge`);
+      const startBtn = document.getElementById(`btn-timer-start`);
+      const pauseBtn = document.getElementById(`btn-timer-pause`);
+
+      if (clockEl) {
+        clockEl.textContent = formatTimeMs(timerState.remainingMs);
+      }
+      if (modeBadge) {
+        modeBadge.textContent = timerState.mode === `focus` ? `Focus` : `Break`;
+        modeBadge.classList.toggle(`timer-mode-badge--break`, timerState.mode === `break`);
+      }
+      if (roundBadge) {
+        roundBadge.textContent = `Round ${timerState.round}`;
+      }
+      if (startBtn) {
+        startBtn.disabled = timerState.running;
+      }
+      if (pauseBtn) {
+        pauseBtn.disabled = !timerState.running;
+      }
+    }
+
+    function setTimerMessage(text, announce) {
+      const banner = document.getElementById(`timer-status-banner`);
+      const sr = document.getElementById(`timer-sr-status`);
+      if (banner) banner.textContent = text;
+      if (sr && announce) sr.textContent = text;
+    }
+
+    function playChimeIfEnabled() {
+      const toggle = document.getElementById(`sound-toggle`);
+      if (!toggle || !toggle.checked) return;
+
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const now = ctx.currentTime;
+
+        const osc1 = ctx.createOscillator();
+        const gain1 = ctx.createGain();
+        osc1.type = `sine`;
+        osc1.frequency.setValueAtTime(523.25, now);
+        gain1.gain.setValueAtTime(0.12, now);
+        gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+        osc1.connect(gain1);
+        gain1.connect(ctx.destination);
+        osc1.start(now);
+        osc1.stop(now + 0.45);
+
+        const osc2 = ctx.createOscillator();
+        const gain2 = ctx.createGain();
+        osc2.type = `sine`;
+        osc2.frequency.setValueAtTime(659.25, now + 0.2);
+        gain2.gain.setValueAtTime(0.12, now + 0.2);
+        gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.75);
+        osc2.connect(gain2);
+        gain2.connect(ctx.destination);
+        osc2.start(now + 0.2);
+        osc2.stop(now + 0.75);
+      } catch (e) {
+        /* Web Audio unavailable or blocked */
+      }
+    }
+
+    function stopInterval() {
+      if (timerState.intervalId !== null) {
+        clearInterval(timerState.intervalId);
+        timerState.intervalId = null;
+      }
+    }
+
+    function handleTimerTick() {
+      if (!timerState.running || timerState.endTime === null) return;
+      const left = timerState.endTime - Date.now();
+
+      if (left <= 0) {
+        playChimeIfEnabled();
+
+        if (timerState.mode === `focus`) {
+          const completedRound = timerState.round;
+          timerState.mode = `break`;
+          timerState.remainingMs = timerState.breakMinutes * 60 * 1000;
+          timerState.endTime = Date.now() + timerState.remainingMs;
+
+          const msg = completedRound % 4 === 0
+            ? `Time for a break. Nice work. Take a longer break.`
+            : `Time for a break.`;
+          setTimerMessage(msg, true);
+          updateTimerDisplay();
+        } else {
+          stopInterval();
+          timerState.running = false;
+          timerState.endTime = null;
+          timerState.mode = `focus`;
+          timerState.round += 1;
+          timerState.remainingMs = timerState.focusMinutes * 60 * 1000;
+
+          setTimerMessage(`Ready for the next round?`, true);
+          updateTimerDisplay();
+        }
+      } else {
+        timerState.remainingMs = left;
+        updateTimerDisplay();
+      }
+    }
+
+    function startTimer() {
+      if (timerState.running) return;
+      readTimerInputs();
+      if (timerState.remainingMs <= 0) {
+        timerState.remainingMs = (timerState.mode === `focus` ? timerState.focusMinutes : timerState.breakMinutes) * 60 * 1000;
+      }
+
+      timerState.running = true;
+      timerState.endTime = Date.now() + timerState.remainingMs;
+      setTimerMessage(``, false);
+      const sr = document.getElementById(`timer-sr-status`);
+      if (sr) {
+        sr.textContent = `${timerState.mode === `focus` ? `Focus` : `Break`} started, Round ${timerState.round}.`;
+      }
+
+      stopInterval();
+      timerState.intervalId = setInterval(handleTimerTick, 250);
+      updateTimerDisplay();
+    }
+
+    function pauseTimer() {
+      if (!timerState.running) return;
+      if (timerState.endTime !== null) {
+        timerState.remainingMs = Math.max(0, timerState.endTime - Date.now());
+      }
+      timerState.running = false;
+      timerState.endTime = null;
+      stopInterval();
+      updateTimerDisplay();
+      const sr = document.getElementById(`timer-sr-status`);
+      if (sr) sr.textContent = `Timer paused.`;
+    }
+
+    function resetTimer() {
+      stopInterval();
+      timerState.running = false;
+      timerState.endTime = null;
+      timerState.mode = `focus`;
+      timerState.round = 1;
+      readTimerInputs();
+      timerState.remainingMs = timerState.focusMinutes * 60 * 1000;
+      setTimerMessage(``, false);
+      const sr = document.getElementById(`timer-sr-status`);
+      if (sr) sr.textContent = `Timer reset to ${timerState.focusMinutes} minutes.`;
+      updateTimerDisplay();
+    }
+
+    function handleDurationInputChange() {
+      readTimerInputs();
+      if (!timerState.running) {
+        timerState.remainingMs = (timerState.mode === `focus` ? timerState.focusMinutes : timerState.breakMinutes) * 60 * 1000;
+        updateTimerDisplay();
+      }
+    }
+
+    function applyPresetFiveMin() {
+      const focusInput = document.getElementById(`input-focus-min`);
+      const focusErr = document.getElementById(`err-focus-min`);
+      if (focusInput) focusInput.value = `5`;
+      if (focusErr) focusErr.textContent = ``;
+      resetTimer();
+    }
+
+    function applyPresetPomodoro() {
+      const focusInput = document.getElementById(`input-focus-min`);
+      const breakInput = document.getElementById(`input-break-min`);
+      const focusErr = document.getElementById(`err-focus-min`);
+      const breakErr = document.getElementById(`err-break-min`);
+      if (focusInput) focusInput.value = `25`;
+      if (breakInput) breakInput.value = `5`;
+      if (focusErr) focusErr.textContent = ``;
+      if (breakErr) breakErr.textContent = ``;
+      resetTimer();
+    }
+
+    document.addEventListener(`visibilitychange`, function () {
+      if (!document.hidden && timerState.running) {
+        handleTimerTick();
+      }
+    });
+
+    /* Initialize page */
+    renderStrategyCards();
+    updateTimerDisplay();
+  </script>
+</body>
+</html>
